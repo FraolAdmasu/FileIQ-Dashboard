@@ -27,7 +27,8 @@ st.markdown("Analyze your digital universe with professional insights.")
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["File & Folder Analysis", "Data (Excel) Analysis"])
 
-import tkinter as tk
+# import tkinter as tk
+uploaded_file = st.file_uploader("Upload ZIP or Excel file", type=["zip", "xlsx", "csv"])
 from tkinter import filedialog
 from utils.file_processing import scan_directory, extract_zip, format_size, cleanup_temp_dir
 from utils.ui_components import metric_card, create_pie_chart, create_bar_chart, create_line_chart

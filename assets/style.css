@@ -1,0 +1,57 @@
+/* Modern, minimal dashboard styling */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html, body, [class*="css"]  {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Card Styling */
+.metric-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.metric-card.dark {
+    background-color: #1e2126;
+    border-color: #2d3139;
+    color: #e2e8f0;
+}
+
+.metric-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.metric-card.dark .metric-value {
+    color: #f8fafc;
+}
+
+/* Hide Streamlit default UI elements if desired (e.g., main menu, footer) */
+#MainMenu {visibility: visible;}
+footer {visibility: hidden;}
+
+/* Adjust padding for top */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}

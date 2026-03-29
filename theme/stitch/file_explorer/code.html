@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>File Explorer | Glacier Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#c8a0f0",
+              "surface-container-lowest": "#0a0e1a",
+              "secondary-fixed-dim": "#88b4cc",
+              "inverse-surface": "#e0e8f0",
+              "secondary-fixed": "#c0d8e8",
+              "outline-variant": "#2a3a48",
+              "background": "#0a0e1a",
+              "on-error": "#1a0000",
+              "on-tertiary-fixed": "#1a002e",
+              "on-primary-fixed-variant": "#004d73",
+              "on-primary": "#001f2e",
+              "on-surface": "#e0e8f0",
+              "on-secondary": "#001f2e",
+              "on-primary-container": "#c8eaff",
+              "error": "#ff6b6b",
+              "surface-dim": "#0f1524",
+              "on-tertiary-container": "#e8d0ff",
+              "on-tertiary": "#1a002e",
+              "tertiary": "#c8a0f0",
+              "surface-container-low": "#111828",
+              "surface-bright": "#1a2438",
+              "surface-container-high": "#1a2438",
+              "outline": "#4a6070",
+              "inverse-primary": "#0a4c6e",
+              "on-background": "#e0e8f0",
+              "tertiary-fixed": "#e8d0ff",
+              "surface": "#0f1524",
+              "secondary-container": "#1a3a4e",
+              "on-error-container": "#ffb3b3",
+              "primary-container": "#0e4d6e",
+              "primary-fixed-dim": "#7dd3fc",
+              "surface-variant": "#1a2438",
+              "on-secondary-fixed": "#0d1f2b",
+              "surface-container-highest": "#202c42",
+              "tertiary-container": "#3d2060",
+              "error-container": "#3d1414",
+              "primary": "#7dd3fc",
+              "inverse-on-surface": "#0a0e1a",
+              "surface-tint": "#7dd3fc",
+              "on-tertiary-fixed-variant": "#4d2a73",
+              "on-surface-variant": "#a0b4c4",
+              "on-secondary-fixed-variant": "#2a4a5e",
+              "on-secondary-container": "#c0d8e8",
+              "on-primary-fixed": "#001f2e",
+              "secondary": "#88b4cc",
+              "primary-fixed": "#c8eaff",
+              "surface-container": "#141c2e"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel {
+            background: rgba(15, 21, 36, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(125, 211, 252, 0.1);
+        }
+        .glass-panel-elevated {
+            background: rgba(15, 21, 36, 0.75);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(125, 211, 252, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-slate-950/60 backdrop-blur-xl border-b border-white/5 shadow-[0_0_30px_rgba(125,211,252,0.05)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-semibold tracking-tight text-sky-300 font-sans antialiased">Glacier Intelligence</span>
+<div class="hidden md:flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-low border border-outline-variant rounded-full py-1.5 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all w-64" placeholder="Global search..." type="text"/>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-sky-400/10 transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-sky-400/10 transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="User Profile" data-alt="close-up portrait of a professional man in a dark studio setting with soft cyan rim lighting reflecting his profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbFxrj91WCA5GLmEPKBpnRdMnDmPo9-jRh8NkIb7hElKvJ9dGamht6Fip_xlXbnf96ZG6cVpZyCYqeXcX0on1yGvekXkd29gepGd2K0PAN5aXYKB3guGrjJm9wjaZ2_KSyzhSf2rJEkdCMAc2hWeHxnGJ5MjLgHmAmY_aj_kqRITyh3P4MNHgIJrUmvLsWuZGDomUGfCPoLssJt6u3KmsHLcopFyRiKEwkxxrorU7ApMEIuPs_qCiu29oqmz2d4CPVduHoIn-A0kk"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 flex flex-col py-6 px-4 bg-slate-950/75 backdrop-blur-2xl border-r border-white/5 shadow-2xl transition-all duration-300 ease-in-out">
+<div class="mt-16 flex items-center gap-3 px-2 mb-10">
+<div class="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">ac_unit</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-sky-300 leading-tight">Glacier</h2>
+<p class="text-xs text-slate-400 uppercase tracking-widest font-semibold">File Intelligence</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/5 group transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">upload_file</span>
+<span class="font-sans text-sm font-medium">Upload</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/5 group transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-sans text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/5 group transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">analytics</span>
+<span class="font-sans text-sm font-medium">Data Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-sky-400/20 text-sky-300 border-r-2 border-sky-400 transition-all" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-sans text-sm font-medium">File Explorer</span>
+</a>
+</nav>
+<div class="px-2 mb-6">
+<button class="w-full flex items-center justify-center gap-2 bg-primary/10 border border-primary/30 text-primary py-3 rounded-xl font-bold hover:bg-primary/20 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                New Analysis
+            </button>
+</div>
+<div class="border-t border-white/5 pt-6 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="font-sans text-sm font-medium">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-sm text-error/70">logout</span>
+<span class="font-sans text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+<div>
+<h1 class="text-3xl font-bold text-on-surface tracking-tight mb-2">File Explorer</h1>
+<p class="text-on-surface-variant">Manage and analyze your processed datasets</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-xl">ios_share</span>
+<span class="text-sm font-medium">Export to CSV</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-on-primary font-bold hover:brightness-110 transition-all shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-xl">cloud_upload</span>
+<span class="text-sm">Upload New</span>
+</button>
+</div>
+</div>
+<!-- Bento Filter Section -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+<!-- Search & Filters -->
+<div class="md:col-span-2 glass-panel p-4 rounded-xl flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-bold uppercase tracking-widest text-primary/70">Advanced Search</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">filter_alt</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="Search by filename, tag, or metadata..." type="text"/>
+</div>
+</div>
+<!-- Multi-select File Types -->
+<div class="glass-panel p-4 rounded-xl">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold uppercase tracking-widest text-primary/70">File Types</span>
+<span class="text-xs text-on-surface-variant">4 selected</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 rounded bg-primary/20 text-primary text-[10px] font-bold flex items-center gap-1 border border-primary/20">
+                            CSV <span class="material-symbols-outlined text-[12px] cursor-pointer">close</span>
+</span>
+<span class="px-2 py-1 rounded bg-tertiary/20 text-tertiary text-[10px] font-bold flex items-center gap-1 border border-tertiary/20">
+                            JSON <span class="material-symbols-outlined text-[12px] cursor-pointer">close</span>
+</span>
+<span class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold flex items-center gap-1">
+                            PARQUET <span class="material-symbols-outlined text-[12px] cursor-pointer">close</span>
+</span>
+<span class="px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant text-[10px] font-bold hover:text-on-surface cursor-pointer">+2 more</span>
+</div>
+</div>
+<!-- Date Range Filter -->
+<div class="glass-panel p-4 rounded-xl flex flex-col justify-center">
+<span class="text-xs font-bold uppercase tracking-widest text-primary/70 mb-3">Analysis Date Range</span>
+<div class="flex items-center gap-2">
+<div class="flex-1 bg-surface-container-low border border-outline-variant rounded px-2 py-1.5 flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant">Jan 12, 2024</span>
+<span class="material-symbols-outlined text-xs">calendar_today</span>
+</div>
+<span class="text-on-surface-variant text-xs">to</span>
+<div class="flex-1 bg-surface-container-low border border-outline-variant rounded px-2 py-1.5 flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant">Today</span>
+<span class="material-symbols-outlined text-xs">calendar_today</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Interactive Table -->
+<div class="glass-panel-elevated rounded-2xl overflow-hidden shadow-2xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-white/5 bg-white/5">
+<th class="py-5 px-6 font-semibold text-xs text-on-surface-variant uppercase tracking-wider">
+<input class="rounded border-outline bg-surface-container-low text-primary focus:ring-primary" type="checkbox"/>
+</th>
+<th class="py-5 px-6 font-semibold text-xs text-on-surface-variant uppercase tracking-wider">File Name</th>
+<th class="py-5 px-6 font-semibold text-xs text-on-surface-variant uppercase tracking-wider">Type</th>
+<th class="py-5 px-6 font-semibold text-xs text-on-surface-variant uppercase tracking-wider">Size</th>
+<th class="py-5 px-6 font-semibold text-xs text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="py-5 px-6 font-semibold text-xs text-on-surface-variant uppercase tracking-wider">Last Modified</th>
+<th class="py-5 px-6 font-semibold text-xs text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<!-- Row 1 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-4 px-6">
+<input class="rounded border-outline bg-surface-container-low text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">description</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">q4_revenue_projection_v2.csv</div>
+<div class="text-[10px] text-on-surface-variant">Project: Financial Forecast 2024</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">CSV File</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">2.4 MB</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20">
+<span class="w-1 h-1 rounded-full bg-emerald-400 animate-pulse"></span> Processed
+                                    </span>
+</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">2h ago</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-primary/20 text-primary rounded-lg transition-all"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-1.5 hover:bg-tertiary/20 text-tertiary rounded-lg transition-all"><span class="material-symbols-outlined text-lg">download</span></button>
+<button class="p-1.5 hover:bg-white/10 text-on-surface-variant rounded-lg transition-all"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-4 px-6">
+<input class="rounded border-outline bg-surface-container-low text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-xl">database</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">customer_segmentation_raw.json</div>
+<div class="text-[10px] text-on-surface-variant">Project: User Analytics</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">JSON</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">14.8 MB</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 text-[10px] font-bold border border-sky-500/20">
+                                        Indexing
+                                    </span>
+</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">Oct 24, 2023</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-primary/20 text-primary rounded-lg transition-all"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-1.5 hover:bg-tertiary/20 text-tertiary rounded-lg transition-all"><span class="material-symbols-outlined text-lg">download</span></button>
+<button class="p-1.5 hover:bg-white/10 text-on-surface-variant rounded-lg transition-all"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-4 px-6">
+<input checked="" class="rounded border-outline bg-surface-container-low text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-xl">folder_zip</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">archive_2023_complete.zip</div>
+<div class="text-[10px] text-on-surface-variant">Internal Backups</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">ZIP Archive</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">1.2 GB</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/5 text-on-surface-variant text-[10px] font-bold border border-white/10">
+                                        Archived
+                                    </span>
+</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">Oct 20, 2023</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-primary/20 text-primary rounded-lg transition-all"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-1.5 hover:bg-tertiary/20 text-tertiary rounded-lg transition-all"><span class="material-symbols-outlined text-lg">download</span></button>
+<button class="p-1.5 hover:bg-white/10 text-on-surface-variant rounded-lg transition-all"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-4 px-6">
+<input class="rounded border-outline bg-surface-container-low text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-error/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-xl">report</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">malformed_log_data.txt</div>
+<div class="text-[10px] text-on-surface-variant">System Logs</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">TEXT</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">42 KB</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error/10 text-error text-[10px] font-bold border border-error/20">
+                                        Error
+                                    </span>
+</td>
+<td class="py-4 px-6 text-sm text-on-surface-variant">Oct 19, 2023</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-primary/20 text-primary rounded-lg transition-all"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-1.5 hover:bg-tertiary/20 text-tertiary rounded-lg transition-all"><span class="material-symbols-outlined text-lg">download</span></button>
+<button class="p-1.5 hover:bg-white/10 text-on-surface-variant rounded-lg transition-all"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between px-6 py-4 bg-white/5 border-t border-white/5">
+<span class="text-xs text-on-surface-variant">Showing 1 to 4 of 128 results</span>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface transition-all disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded bg-primary/20 text-primary text-xs font-bold border border-primary/20">1</button>
+<button class="px-3 py-1 rounded hover:bg-white/5 text-on-surface-variant text-xs transition-all">2</button>
+<button class="px-3 py-1 rounded hover:bg-white/5 text-on-surface-variant text-xs transition-all">3</button>
+<span class="text-on-surface-variant px-1">...</span>
+<button class="px-3 py-1 rounded hover:bg-white/5 text-on-surface-variant text-xs transition-all">32</button>
+<button class="p-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Insight Footer -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-panel p-5 rounded-2xl border-l-4 border-l-primary flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-on-surface mb-1">Storage Usage</h4>
+<p class="text-xs text-on-surface-variant mb-2">You have used 85% of your available storage.</p>
+<div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+</div>
+<div class="glass-panel p-5 rounded-2xl border-l-4 border-l-tertiary flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary">bolt</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-on-surface mb-1">Processing Queue</h4>
+<p class="text-xs text-on-surface-variant">3 files currently being indexed for analysis.</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-[10px] text-tertiary font-medium">System Optimal</span>
+</div>
+</div>
+</div>
+<div class="glass-panel p-5 rounded-2xl border-l-4 border-l-secondary flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary">history</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-on-surface mb-1">Recent Activity</h4>
+<p class="text-xs text-on-surface-variant">Last export generated: 14:02 UTC today.</p>
+<button class="text-[10px] text-primary font-bold mt-2 hover:underline">View History</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Glacier Intelligence | Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0e1a;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(15, 21, 36, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(125, 211, 252, 0.1);
+        }
+        .glass-card-elevated {
+            background: rgba(15, 21, 36, 0.75);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(125, 211, 252, 0.15);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#c8a0f0",
+                        "surface-container-lowest": "#0a0e1a",
+                        "secondary-fixed-dim": "#88b4cc",
+                        "inverse-surface": "#e0e8f0",
+                        "secondary-fixed": "#c0d8e8",
+                        "outline-variant": "#2a3a48",
+                        "background": "#0a0e1a",
+                        "on-error": "#1a0000",
+                        "on-tertiary-fixed": "#1a002e",
+                        "on-primary-fixed-variant": "#004d73",
+                        "on-primary": "#001f2e",
+                        "on-surface": "#e0e8f0",
+                        "on-secondary": "#001f2e",
+                        "on-primary-container": "#c8eaff",
+                        "error": "#ff6b6b",
+                        "surface-dim": "#0f1524",
+                        "on-tertiary-container": "#e8d0ff",
+                        "on-tertiary": "#1a002e",
+                        "tertiary": "#c8a0f0",
+                        "surface-container-low": "#111828",
+                        "surface-bright": "#1a2438",
+                        "surface-container-high": "#1a2438",
+                        "outline": "#4a6070",
+                        "inverse-primary": "#0a4c6e",
+                        "on-background": "#e0e8f0",
+                        "tertiary-fixed": "#e8d0ff",
+                        "surface": "#0f1524",
+                        "secondary-container": "#1a3a4e",
+                        "on-error-container": "#ffb3b3",
+                        "primary-container": "#0e4d6e",
+                        "primary-fixed-dim": "#7dd3fc",
+                        "surface-variant": "#1a2438",
+                        "on-secondary-fixed": "#0d1f2b",
+                        "surface-container-highest": "#202c42",
+                        "tertiary-container": "#3d2060",
+                        "error-container": "#3d1414",
+                        "primary": "#7dd3fc",
+                        "inverse-on-surface": "#0a0e1a",
+                        "surface-tint": "#7dd3fc",
+                        "on-tertiary-fixed-variant": "#4d2a73",
+                        "on-surface-variant": "#a0b4c4",
+                        "on-secondary-fixed-variant": "#2a4a5e",
+                        "on-secondary-container": "#c0d8e8",
+                        "on-primary-fixed": "#001f2e",
+                        "secondary": "#88b4cc",
+                        "primary-fixed": "#c8eaff",
+                        "surface-container": "#141c2e"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full border-b border-sky-400/10 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 z-50 shadow-[0_0_30px_rgba(125,211,252,0.05)]">
+<div class="flex items-center gap-4">
+<span class="text-xl font-semibold tracking-tight text-sky-300">Glacier Intelligence</span>
+<div class="hidden md:flex items-center ml-8 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 w-64">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 text-slate-200 placeholder:text-slate-500 w-full" placeholder="Search files..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-400 hover:bg-sky-400/10 transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-sky-400/10 transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center border border-primary/20 ml-2 overflow-hidden">
+<img alt="User Profile" data-alt="professional portrait of a tech executive in a dark modern office with blue accent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClEK_L2Mz5pNl0v-cBFka_gqzhA-Bnhi1IwUnC2iFtvq8pbFLOyVzM6g5ucjKYXC-bTjGPV0OY_WwB94tYC1kNV_fQuQ8zb-JedT7f96RRVlxJ-W_c1xeg7AcC5D8OahwL80mZfEu6FSzHbLeC_OjHMb7Z38731Pj522W8ug06QWTTfbiD8X7phCbvpsOgQG18-Gx6Whs5oWMOcB7mmV3A3-wwJLLVuPl19LuQ37fH3ZRrYC-8att6ihZko9AGkbQe-fsN5Ipzmfs"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r border-sky-400/10 bg-slate-950/75 backdrop-blur-2xl flex flex-col py-6 px-4 z-40 shadow-2xl transition-all duration-300 ease-in-out">
+<div class="mt-16 mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 bg-primary/20 rounded-lg flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">ac_unit</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-sky-300 leading-tight">Glacier</h1>
+<p class="text-xs text-slate-500 font-medium">File Intelligence</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">upload_file</span>
+<span class="font-sans text-sm font-medium">Upload</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-sky-400/20 text-sky-300 border-r-2 border-sky-400 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-sans text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-sans text-sm font-medium">Data Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-sans text-sm font-medium">File Explorer</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 border-t border-white/5 pt-4">
+<button class="w-full mb-4 py-2.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded-lg font-semibold text-sm transition-all active:scale-95">
+                New Analysis
+            </button>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-sans text-sm font-medium">Help</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-sans text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 pt-24 pb-12 px-8">
+<header class="mb-10">
+<h2 class="text-3xl font-bold text-white tracking-tight">Intelligence Dashboard</h2>
+<p class="text-on-surface-variant mt-1">Real-time analysis of the file ecosystem.</p>
+</header>
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="glass-card p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all"></div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant text-sm font-medium">Total Files</span>
+<span class="material-symbols-outlined text-primary opacity-60">description</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold text-white">1,284,092</h3>
+<span class="text-xs text-emerald-400 font-medium">+12% ↑</span>
+</div>
+<div class="mt-4 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/5 rounded-full blur-2xl group-hover:bg-tertiary/10 transition-all"></div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant text-sm font-medium">Total Size</span>
+<span class="material-symbols-outlined text-tertiary opacity-60">database</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold text-white">4.2 TB</h3>
+<span class="text-xs text-emerald-400 font-medium">+2.1 TB ↑</span>
+</div>
+<div class="mt-4 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-1/2 rounded-full"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-sky-400/5 rounded-full blur-2xl group-hover:bg-sky-400/10 transition-all"></div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant text-sm font-medium">Unique Types</span>
+<span class="material-symbols-outlined text-sky-300 opacity-60">category</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold text-white">142</h3>
+<span class="text-xs text-slate-500 font-medium">Stable</span>
+</div>
+<div class="mt-4 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-sky-300 w-1/4 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Charts -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Line Chart: Creation Trends -->
+<div class="col-span-12 lg:col-span-8 glass-card rounded-xl p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-lg font-bold text-white">Creation Trends</h4>
+<p class="text-xs text-on-surface-variant">File ingestion over the last 30 days</p>
+</div>
+<select class="bg-white/5 border border-white/10 text-xs rounded-lg px-3 py-1.5 focus:ring-primary focus:border-primary text-slate-300">
+<option>Last 30 Days</option>
+<option>Last 6 Months</option>
+<option>Year to Date</option>
+</select>
+</div>
+<div class="h-64 flex items-end justify-between gap-2 px-2 relative">
+<!-- Fake Line Chart Visualization -->
+<div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+<div class="w-full h-[1px] bg-white/20"></div>
+</div>
+<svg class="w-full h-full overflow-visible" viewbox="0 0 800 200">
+<defs>
+<lineargradient id="line-gradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,150 Q50,130 100,140 T200,80 T300,110 T400,40 T500,90 T600,60 T700,80 T800,50" fill="none" stroke="#7dd3fc" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0,150 Q50,130 100,140 T200,80 T300,110 T400,40 T500,90 T600,60 T700,80 T800,50 V200 H0 Z" fill="url(#line-gradient)"></path>
+</svg>
+</div>
+<div class="flex justify-between mt-4 px-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+<span>Oct 01</span>
+<span>Oct 07</span>
+<span>Oct 14</span>
+<span>Oct 21</span>
+<span>Oct 28</span>
+</div>
+</div>
+<!-- Pie Chart: File Types -->
+<div class="col-span-12 lg:col-span-4 glass-card rounded-xl p-6 flex flex-col">
+<h4 class="text-lg font-bold text-white mb-1">File Types</h4>
+<p class="text-xs text-on-surface-variant mb-8">Distribution by category</p>
+<div class="flex-1 flex items-center justify-center relative mb-6">
+<!-- Decorative Pie Representation -->
+<div class="w-48 h-48 rounded-full border-[20px] border-primary/20 relative flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border-[20px] border-primary border-t-transparent border-r-transparent transform -rotate-45"></div>
+<div class="absolute inset-0 rounded-full border-[20px] border-tertiary border-l-transparent border-t-transparent border-b-transparent transform rotate-12"></div>
+<div class="text-center">
+<span class="block text-2xl font-bold text-white">84%</span>
+<span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Digital</span>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<span class="text-on-surface-variant">Documents</span>
+</div>
+<span class="text-white font-medium">42%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary"></div>
+<span class="text-on-surface-variant">Media</span>
+</div>
+<span class="text-white font-medium">28%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-sky-900"></div>
+<span class="text-on-surface-variant">Executables</span>
+</div>
+<span class="text-white font-medium">15%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-white/10"></div>
+<span class="text-on-surface-variant">Other</span>
+</div>
+<span class="text-white font-medium">15%</span>
+</div>
+</div>
+</div>
+<!-- Bar Chart: Top 10 Largest Files -->
+<div class="col-span-12 glass-card rounded-xl p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-lg font-bold text-white">Top 10 Largest Files</h4>
+<p class="text-xs text-on-surface-variant">Identification of high-capacity storage consumption</p>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">View All Analysis</button>
+</div>
+<div class="space-y-4">
+<!-- Bar Item 1 -->
+<div class="group">
+<div class="flex justify-between items-center mb-1 text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm">movie</span>
+<span class="text-slate-200 font-medium">2023_Q4_Archive_Raw.mp4</span>
+</div>
+<span class="text-slate-400">842.5 GB</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-sky-400 w-[95%] rounded-full group-hover:opacity-80 transition-all"></div>
+</div>
+</div>
+<!-- Bar Item 2 -->
+<div class="group">
+<div class="flex justify-between items-center mb-1 text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm">database</span>
+<span class="text-slate-200 font-medium">prod_dump_october.sql</span>
+</div>
+<span class="text-slate-400">512.0 GB</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-sky-400 w-[60%] rounded-full group-hover:opacity-80 transition-all"></div>
+</div>
+</div>
+<!-- Bar Item 3 -->
+<div class="group">
+<div class="flex justify-between items-center mb-1 text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm">folder_zip</span>
+<span class="text-slate-200 font-medium">client_backup_v2.tar.gz</span>
+</div>
+<span class="text-slate-400">428.1 GB</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-sky-400 w-[48%] rounded-full group-hover:opacity-80 transition-all"></div>
+</div>
+</div>
+<!-- Bar Item 4 -->
+<div class="group">
+<div class="flex justify-between items-center mb-1 text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm">description</span>
+<span class="text-slate-200 font-medium">global_index_final.parquet</span>
+</div>
+<span class="text-slate-400">312.4 GB</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-sky-400 w-[35%] rounded-full group-hover:opacity-80 transition-all"></div>
+</div>
+</div>
+<!-- Bar Item 5 -->
+<div class="group">
+<div class="flex justify-between items-center mb-1 text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm">settings_system_daydream</span>
+<span class="text-slate-200 font-medium">system_image_x86.iso</span>
+</div>
+<span class="text-slate-400">240.0 GB</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-sky-400 w-[25%] rounded-full group-hover:opacity-80 transition-all"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Logs Section (Asymmetric Addition) -->
+<div class="col-span-12 glass-card rounded-xl overflow-hidden">
+<div class="p-6 border-b border-white/5 flex items-center justify-between">
+<h4 class="text-lg font-bold text-white">Recent Intel Actions</h4>
+<span class="px-2 py-1 rounded bg-sky-400/10 text-primary text-[10px] font-bold uppercase tracking-wider">Live Feed</span>
+</div>
+<div class="divide-y divide-white/5">
+<div class="p-4 hover:bg-white/5 transition-colors flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+<span class="material-symbols-outlined text-sm">verified</span>
+</div>
+<div class="flex-1">
+<p class="text-sm text-slate-200">Security scan completed for <span class="font-bold">financial_reports.zip</span></p>
+<p class="text-xs text-slate-500">2 minutes ago • Node Alpha-04</p>
+</div>
+<button class="p-2 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="p-4 hover:bg-white/5 transition-colors flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">file_copy</span>
+</div>
+<div class="flex-1">
+<p class="text-sm text-slate-200">New batch upload detected: <span class="font-bold">42 files</span> added to 'Training Data'</p>
+<p class="text-xs text-slate-500">14 minutes ago • User 7822</p>
+</div>
+<button class="p-2 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="p-4 hover:bg-white/5 transition-colors flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-error/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-sm">warning</span>
+</div>
+<div class="flex-1">
+<p class="text-sm text-slate-200">Unauthorized access attempt on <span class="font-bold">private_keys.pem</span></p>
+<p class="text-xs text-slate-500">42 minutes ago • IP 192.168.1.104</p>
+</div>
+<button class="p-2 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Subtle Glows -->
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-tertiary/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+</body></html>

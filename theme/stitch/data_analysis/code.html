@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#c8a0f0",
+              "surface-container-lowest": "#0a0e1a",
+              "secondary-fixed-dim": "#88b4cc",
+              "inverse-surface": "#e0e8f0",
+              "secondary-fixed": "#c0d8e8",
+              "outline-variant": "#2a3a48",
+              "background": "#0a0e1a",
+              "on-error": "#1a0000",
+              "on-tertiary-fixed": "#1a002e",
+              "on-primary-fixed-variant": "#004d73",
+              "on-primary": "#001f2e",
+              "on-surface": "#e0e8f0",
+              "on-secondary": "#001f2e",
+              "on-primary-container": "#c8eaff",
+              "error": "#ff6b6b",
+              "surface-dim": "#0f1524",
+              "on-tertiary-container": "#e8d0ff",
+              "on-tertiary": "#1a002e",
+              "tertiary": "#c8a0f0",
+              "surface-container-low": "#111828",
+              "surface-bright": "#1a2438",
+              "surface-container-high": "#1a2438",
+              "outline": "#4a6070",
+              "inverse-primary": "#0a4c6e",
+              "on-background": "#e0e8f0",
+              "tertiary-fixed": "#e8d0ff",
+              "surface": "#0f1524",
+              "secondary-container": "#1a3a4e",
+              "on-error-container": "#ffb3b3",
+              "primary-container": "#0e4d6e",
+              "primary-fixed-dim": "#7dd3fc",
+              "surface-variant": "#1a2438",
+              "on-secondary-fixed": "#0d1f2b",
+              "surface-container-highest": "#202c42",
+              "tertiary-container": "#3d2060",
+              "error-container": "#3d1414",
+              "primary": "#7dd3fc",
+              "inverse-on-surface": "#0a0e1a",
+              "surface-tint": "#7dd3fc",
+              "on-tertiary-fixed-variant": "#4d2a73",
+              "on-surface-variant": "#a0b4c4",
+              "on-secondary-fixed-variant": "#2a4a5e",
+              "on-secondary-container": "#c0d8e8",
+              "on-primary-fixed": "#001f2e",
+              "secondary": "#88b4cc",
+              "primary-fixed": "#c8eaff",
+              "surface-container": "#141c2e"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(15, 21, 36, 0.6);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(125, 211, 252, 0.1);
+      }
+      .glass-card-elevated {
+        background: rgba(15, 21, 36, 0.75);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(125, 211, 252, 0.15);
+      }
+      body {
+        background-color: #0a0e1a;
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full border-b border-sky-400/10 bg-slate-950/60 backdrop-blur-xl shadow-[0_0_30px_rgba(125,211,252,0.05)] flex justify-between items-center px-6 h-16 w-full z-50 font-sans antialiased text-slate-200">
+<div class="flex items-center gap-4">
+<span class="text-xl font-semibold tracking-tight text-sky-300">Glacier Intelligence</span>
+</div>
+<div class="flex-1 max-w-xl px-8">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 focus:outline-none focus:border-sky-400/50 transition-all text-sm" placeholder="Search insights..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-400 hover:bg-sky-400/10 transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-sky-400/10 transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-sky-400/20">
+<img alt="User Profile" class="h-full w-full object-cover" data-alt="close-up portrait of a professional analyst in a high-tech environment with soft blue rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJD6p7f2RA6qjG5kIgHZ2BV5png1bbOk5ihPB5tqFBJ9TTlzTCxVhvqZgru8TOQo3S7uy0IDgTw6rd21tF7lX3jociGCOGc9Mu-dspY3BsCX1AFZj1_nMVqT30FPlxQyPhsixdCCd6ylgF7DhL5EJxJ_hkEgNLiRfC9lOxj7FVsOtC8xihBmXcda1UMkY25GDz3PvS17oaEfcVQwv2ArFdXEJWsYB74IrJoqAm7wpGffgwm7dkp9hal3YRUt-ibSXs5U_IRxLqejw"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r border-sky-400/10 bg-slate-950/75 backdrop-blur-2xl shadow-2xl flex flex-col h-screen py-6 px-4 z-40 font-sans text-sm font-medium">
+<div class="mt-16 mb-8 px-2 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-sky-400/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-sky-300">ac_unit</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-sky-300 leading-none">Glacier</h2>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">File Intelligence</p>
+</div>
+</div>
+<button class="mb-8 w-full py-3 bg-sky-400/20 border border-sky-400/30 rounded-xl text-sky-300 font-bold flex items-center justify-center gap-2 hover:bg-sky-400/30 transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+            New Analysis
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">upload_file</span>
+                Upload
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-sky-400/20 text-sky-300 border-r-2 border-sky-400 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                Data Analysis
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+                File Explorer
+            </a>
+</nav>
+<div class="mt-auto space-y-1 pt-4 border-t border-white/5">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-16 min-h-screen bg-background">
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<nav class="flex text-xs text-on-surface-variant mb-2 gap-2">
+<span>Analysis</span>
+<span>/</span>
+<span class="text-sky-300">Q4_Revenue_Report.csv</span>
+</nav>
+<h1 class="text-3xl font-bold tracking-tight text-on-surface">Automated Profiling</h1>
+<p class="text-on-surface-variant mt-1">Comprehensive intelligence report for 14,208 records</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-surface-container rounded-lg border border-outline-variant text-sm font-medium hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Export PDF
+                    </button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">auto_awesome</span>
+                        Generate Insights
+                    </button>
+</div>
+</div>
+<!-- Profile Summary Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<span class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Total Rows</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-3xl font-bold">14,208</span>
+<span class="text-emerald-400 text-xs flex items-center"><span class="material-symbols-outlined text-xs">arrow_upward</span> 12%</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<span class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Total Columns</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-3xl font-bold">42</span>
+<span class="text-on-surface-variant text-xs">8 Numerical</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<span class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Missing Values</span>
+<div class="flex items-baseline gap-2 mt-4 text-error">
+<span class="text-3xl font-bold">0.4%</span>
+<span class="text-xs">68 total</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<span class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Unique Keys</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-3xl font-bold">100%</span>
+<span class="text-emerald-400 text-xs flex items-center"><span class="material-symbols-outlined text-xs">check_circle</span> Valid</span>
+</div>
+</div>
+</div>
+<!-- Main Data Visualization Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left: Numerical Distribution (Histogram) -->
+<div class="lg:col-span-8 glass-card p-6 rounded-xl">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-bold text-lg text-on-surface">Revenue Distribution</h3>
+<p class="text-sm text-on-surface-variant">Density analysis of numerical values (USD)</p>
+</div>
+<select class="bg-surface-container border border-outline-variant text-xs rounded-lg px-3 py-1 text-on-surface-variant outline-none">
+<option>Gross Revenue</option>
+<option>Net Margin</option>
+<option>Unit Cost</option>
+</select>
+</div>
+<div class="h-64 flex items-end gap-1 px-2">
+<div class="w-full bg-primary/20 hover:bg-primary transition-all h-[10%]" title="$0-1k"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all h-[15%]" title="$1k-2k"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all h-[25%]" title="$2k-3k"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all h-[40%]" title="$3k-4k"></div>
+<div class="w-full bg-primary/40 hover:bg-primary transition-all h-[65%]" title="$4k-5k"></div>
+<div class="w-full bg-primary/60 hover:bg-primary transition-all h-[85%]" title="$5k-6k"></div>
+<div class="w-full bg-primary hover:bg-primary/80 transition-all h-[100%]" title="$6k-7k"></div>
+<div class="w-full bg-primary/80 hover:bg-primary transition-all h-[75%]" title="$7k-8k"></div>
+<div class="w-full bg-primary/60 hover:bg-primary transition-all h-[55%]" title="$8k-9k"></div>
+<div class="w-full bg-primary/40 hover:bg-primary transition-all h-[35%]" title="$9k-10k"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all h-[15%]" title="$10k-11k"></div>
+<div class="w-full bg-primary/10 hover:bg-primary transition-all h-[5%]" title="$11k+"></div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-on-surface-variant uppercase font-medium">
+<span>$0</span>
+<span>$2k</span>
+<span>$4k</span>
+<span>$6k</span>
+<span>$8k</span>
+<span>$10k+</span>
+</div>
+</div>
+<!-- Right: Categorical Distribution (Pie/Donut) -->
+<div class="lg:col-span-4 glass-card p-6 rounded-xl flex flex-col">
+<h3 class="font-bold text-lg text-on-surface mb-2">Regional Share</h3>
+<p class="text-sm text-on-surface-variant mb-6">Distribution by territory</p>
+<div class="relative w-48 h-48 mx-auto flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Pie Segments -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#7dd3fc" stroke-dasharray="150 251.2" stroke-width="20"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#c8a0f0" stroke-dasharray="60 251.2" stroke-dashoffset="-150" stroke-width="20"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#88b4cc" stroke-dasharray="41.2 251.2" stroke-dashoffset="-210" stroke-width="20"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold">100%</span>
+<span class="text-[10px] text-on-surface-variant">Global</span>
+</div>
+</div>
+<div class="mt-8 space-y-3">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span>North America</span>
+</div>
+<span class="font-bold">60%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<span>Europe</span>
+</div>
+<span class="font-bold">24%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span>Asia-Pacific</span>
+</div>
+<span class="font-bold">16%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Table Preview Section -->
+<div class="glass-card-elevated rounded-xl overflow-hidden">
+<div class="p-6 border-b border-white/5 flex justify-between items-center">
+<h3 class="font-bold text-lg text-on-surface">Data Preview</h3>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-white/5 rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 hover:bg-white/5 rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined">settings_suggest</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-surface-variant/30 text-on-surface-variant font-medium">
+<th class="px-6 py-4">Transaction ID</th>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4">Region</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Revenue</th>
+<th class="px-6 py-4">Quality Score</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-xs text-sky-300">#TRX-94821</td>
+<td class="px-6 py-4">2023-11-24</td>
+<td class="px-6 py-4">California, US</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-emerald-400/10 text-emerald-400 text-[10px] font-bold uppercase">Settled</span>
+</td>
+<td class="px-6 py-4 font-semibold">$12,400.00</td>
+<td class="px-6 py-4">
+<div class="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[95%]"></div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-xs text-sky-300">#TRX-94822</td>
+<td class="px-6 py-4">2023-11-24</td>
+<td class="px-6 py-4">London, UK</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-sky-400/10 text-sky-400 text-[10px] font-bold uppercase">Pending</span>
+</td>
+<td class="px-6 py-4 font-semibold">$8,120.50</td>
+<td class="px-6 py-4">
+<div class="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[88%]"></div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-xs text-sky-300">#TRX-94823</td>
+<td class="px-6 py-4">2023-11-25</td>
+<td class="px-6 py-4">Tokyo, JP</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-error/10 text-error text-[10px] font-bold uppercase">Flagged</span>
+</td>
+<td class="px-6 py-4 font-semibold">$1,200.00</td>
+<td class="px-6 py-4">
+<div class="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-error w-[42%]"></div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-xs text-sky-300">#TRX-94824</td>
+<td class="px-6 py-4">2023-11-25</td>
+<td class="px-6 py-4">Berlin, DE</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded bg-emerald-400/10 text-emerald-400 text-[10px] font-bold uppercase">Settled</span>
+</td>
+<td class="px-6 py-4 font-semibold">$4,550.00</td>
+<td class="px-6 py-4">
+<div class="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[91%]"></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-white/5 flex justify-between items-center text-xs text-on-surface-variant">
+<span>Showing 1 to 4 of 14,208 entries</span>
+<div class="flex gap-1">
+<button class="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">Previous</button>
+<button class="px-3 py-1 bg-primary/20 text-sky-300 rounded-lg font-bold">1</button>
+<button class="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">2</button>
+<button class="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">3</button>
+<button class="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">Next</button>
+</div>
+</div>
+</div>
+<!-- Bento Intelligence Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-card p-6 rounded-xl flex items-start gap-4">
+<div class="p-3 bg-sky-400/10 rounded-xl">
+<span class="material-symbols-outlined text-sky-300">lightbulb</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Anomaly Detected</h4>
+<p class="text-sm text-on-surface-variant mt-1">Found 4 outliers in 'Revenue' column that exceed 3-sigma variance.</p>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex items-start gap-4">
+<div class="p-3 bg-tertiary/10 rounded-xl">
+<span class="material-symbols-outlined text-tertiary">warning</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Data Skewness</h4>
+<p class="text-sm text-on-surface-variant mt-1">'Unit Cost' column is heavily right-skewed. Log transformation recommended.</p>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex items-start gap-4">
+<div class="p-3 bg-secondary/10 rounded-xl">
+<span class="material-symbols-outlined text-secondary">verified</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Schema Health</h4>
+<p class="text-sm text-on-surface-variant mt-1">100% data type consistency detected across all 42 columns.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

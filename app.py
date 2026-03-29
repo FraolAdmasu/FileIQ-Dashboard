@@ -5,7 +5,7 @@ import json
 # Set page config
 st.set_page_config(
     page_title="File Intelligence Dashboard",
-    page_icon="",
+    page_icon="../assets/foldericon.png",
     layout="wide",
     initial_sidebar_state="expanded"
 )

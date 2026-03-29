@@ -59,7 +59,7 @@ This dashboard transforms raw file structures and datasets into actionable insig
 ## 🚀 How to Run Locally
 
 ```bash
-cd "c:/Users/(HP)/Downloads/File Intelligence Dashboard"
+cd "c:/Desktop/File Intelligence Dashboard"
 python -m streamlit run app.py
 ```
 ## 🧠 Tech Stack
